@@ -1,11 +1,14 @@
 require("dotenv").config();
-// var request = require("request");
+var request = require("request");
 // var twitter = require("twitter");
 // var spotify = new Spotify(keys.spotify);
 // var client = new Twitter(keys.twitter);
 var userCommand = process.argv[2];
 var userInput = process.argv[3];
-var request = require("request");
+
+	for (var i = 3; i < userInput.length; i++) {
+	userInput = userInput + " " + userInput[i];
+	}
 
 
 switch (userCommand){
@@ -16,6 +19,7 @@ switch (userCommand){
 	spotify ();
 
 	case "movie-this":
+	
 	movie();
 
 	case "do-what-it-says":
@@ -34,6 +38,7 @@ function spotify (){
 	//get spotify API here
 }
 function movie (){
+
 	request("http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
 
 		if (!error && response.statusCode === 200) {
