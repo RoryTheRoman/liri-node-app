@@ -5,14 +5,14 @@ var request = require("request");
 // var client = new Twitter(keys.twitter);
 var multWords = process.argv;
 var userCommand = process.argv[2];
-var userInput = process.argv[3];
+var userInput = process.argv[3]; 
 
+//create a for loop for user input that is more than one word
 for (var i = 4; i < multWords.length; i++) {
 	userInput = userInput + " " + multWords[i];
 
-
 }
-	console.log(userInput);	
+	
 function movie (){
 
 	request("http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
