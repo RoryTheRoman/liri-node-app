@@ -49,15 +49,21 @@ function movie (){
 function twatter(){
 	var params = {screen_name: 'RoryTheRoman79', count: 20};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
-		console.log("");
-		console.log("My Tweets");
-		console.log("______________")
-		for (var i = 0; i < tweets.length; i++){
+		if (!error){
 			console.log("");
-			console.log(tweets[i].text);
-			console.log("Created: " + tweets[i].created_at);
-			console.log("____");
-		}
+			console.log("My Tweets");
+			console.log("______________")
+			for (var i = 0; i < tweets.length; i++){
+				console.log("");
+				console.log(tweets[i].text);
+				console.log("Created: " + tweets[i].created_at);
+				console.log("____");
+				}
+		}else{
+			console.log("Oops.  Something broke.  Do you have your own Twitter credentials?");
+			console.log("You will need to create your own .env file so you can access your Twitter feed.");
+			return;
+		}	
 });
 }
 function spotIt (){
