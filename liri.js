@@ -1,8 +1,12 @@
 require("dotenv").config();
+var fs = require("fs");
 var request = require("request");
-// var twitter = require("twitter");
-// var spotify = new Spotify(keys.spotify);
-// var client = new Twitter(keys.twitter);
+var http = require("http");
+var keys = require("./keys.js");
+var Spotify = require('node-spotify-api');
+var Twitter = require("twitter");
+var spotify = new Spotify(keys.spotify);
+var client = new Twitter(keys.twitter);
 var multWords = process.argv;
 var userCommand = process.argv[2];
 var userInput = process.argv[3]; 
@@ -10,9 +14,9 @@ var userInput = process.argv[3];
 //create a for loop for user input that is more than one word
 for (var i = 4; i < multWords.length; i++) {
 	userInput = userInput + " " + multWords[i];
-
 }
 	
+
 function movie (){
 
 	request("http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
@@ -35,23 +39,50 @@ function movie (){
 			console.log("");
 			console.log("Actors: " + JSON.parse(body).Actors);
 			console.log("");
+  		}else{
+  			return;
+  			console.log("");
+  			console.log("Your Movie Does Not Exist");
   		}
+	});
+}
+function twatter(){
+	var params = {screen_name: 'RoryTheRoman79', count: 20};
+	client.get('statuses/user_timeline', params, function(error, tweets, response) {
+
+
+    console.log(tweets);
+
 });
 }
+function spotIt (){
+	spotify.search({ type: 'track', query: userInput, limit: 1}, function(err, data) {
+		if (err) {
+    		return console.log('Error occurred: ' + err);
+		}
+ 
+		console.log(data.tracks.items[0]); 
+	});
+}
+
+
 
 switch (userCommand){
 	case "my-tweets":
 	twatter();
+	return;
 
 	case "spotify-this-song":
-	spotify ();
+	spotIt ();
+	return;
 
 	case "movie-this":
-	
 	movie();
+	return;
 
 	case "do-what-it-says":
 	bkstBoys ();
+	return;
 }
 
 
@@ -59,12 +90,7 @@ switch (userCommand){
 
 //functions for cases:
 
-function twatter () {
-	//get tweets here
-}
-function spotify (){
-	//get spotify API here
-}
+
 
 function bkstBoys (){
 	//call up random.txt to get i want it that way displayed
