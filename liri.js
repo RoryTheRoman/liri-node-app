@@ -11,7 +11,7 @@ var multWords = process.argv;
 var userCommand = process.argv[2];
 var userInput = process.argv[3]; 
 
-//create a for loop for user input that is more than one word
+//create a for loop for user input that is more than one word.  this fixes input at the [2] index, but combines input [4] and above.
 for (var i = 4; i < multWords.length; i++) {
 	userInput = userInput + " " + multWords[i];
 }
@@ -49,10 +49,15 @@ function movie (){
 function twatter(){
 	var params = {screen_name: 'RoryTheRoman79', count: 20};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
-
-
-    console.log(tweets);
-
+		console.log("");
+		console.log("My Tweets");
+		console.log("______________")
+		for (var i = 0; i < tweets.length; i++){
+			console.log("");
+			console.log(tweets[i].text);
+			console.log("Created: " + tweets[i].created_at);
+			console.log("____");
+		}
 });
 }
 function spotIt (){
@@ -61,7 +66,7 @@ function spotIt (){
     		return console.log('Error occurred: ' + err);
 		}
  
-		console.log(data.tracks.items[0]); 
+		console.log(data.tracks.items); 
 	});
 }
 
