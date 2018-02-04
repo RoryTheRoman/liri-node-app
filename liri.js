@@ -124,7 +124,7 @@ function logText (){
 		if (err) {
 			return console.log(err);
 		}
-		console.log("Your Search Term has been Logged");
+		console.log("****Your Search Term has been Logged****");
 	});
 }
 
