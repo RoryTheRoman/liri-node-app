@@ -15,8 +15,6 @@ var userInput = process.argv[3];
 for (var i = 4; i < multWords.length; i++) {
 	userInput = userInput + " " + multWords[i];
 }
-	
-
 function movie (){
 
 	request("http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
@@ -84,11 +82,43 @@ function spotIt (){
 			console.log("");
 			console.log("Album Title: " + songData.album.name);
 			console.log("");
-			console.log("NEW SEARCH??\n")
+			console.log("NEW SEARCH??")
+			console.log("");			
 		}	
 	});
 }
-
+function bkstBoys (){
+	//call up random.txt to get i want it that way displayed
+	fs.readFile("random.txt", "utf8", function(error, data) {
+		if (error) {
+			return console.log(error);
+		  }
+		var dataArray = data.split(",");
+		var userCommand = dataArray[0];
+		var updtUserInput = dataArray[1];
+		function newSpotIt (){
+			spotify.search({ type: 'track', query: updtUserInput, limit: 1}, function(err, data) {
+				var songData = data.tracks.items[0];
+				if (err) {
+					return console.log('Error occurred: ' + err);
+				}else{
+					console.log("");
+					console.log("Artist: " + songData.album.artists[0].name); 
+					console.log("");
+					console.log("Song Title: " + songData.name);
+					console.log("");
+					console.log("Spotify Link: " + songData.album.external_urls.spotify);
+					console.log("");
+					console.log("Album Title: " + songData.album.name);
+					console.log("");
+					console.log("NEW SEARCH??")
+					console.log("");			
+				}	
+			});
+		}
+		newSpotIt();		
+	});
+}
 
 
 switch (userCommand){
@@ -112,10 +142,3 @@ switch (userCommand){
 
 
 
-//functions for cases:
-
-
-
-function bkstBoys (){
-	//call up random.txt to get i want it that way displayed
-}
