@@ -128,10 +128,12 @@ switch (userCommand){
 
 	case "spotify-this-song":
 	spotIt ();
+	logText();
 	return;
 
 	case "movie-this":
 	movie();
+	logText();
 	return;
 
 	case "do-what-it-says":
@@ -139,6 +141,13 @@ switch (userCommand){
 	return;
 }
 
-
+function logText (){
+	fs.appendFile("log.txt", "," + userInput, function(err) {
+		if (err) {
+			return console.log(err);
+		}
+		console.log("Logged search");
+	});
+}
 
 
