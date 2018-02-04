@@ -75,13 +75,16 @@ function spotIt (){
 		if (err) {
     		return console.log('Error occurred: ' + err);
 		}else{
+			console.log("");
 			console.log("Artist: " + songData.album.artists[0].name); 
 			console.log("");
-			console.log("Song Title: " + )
+			console.log("Song Title: " + songData.name);
 			console.log("");
-			console.log("Spotify Link: " + )
+			console.log("Spotify Link: " + songData.album.external_urls.spotify);
 			console.log("");
-			console.log("Album Title: "+ )
+			console.log("Album Title: " + songData.album.name);
+			console.log("");
+			console.log("NEW SEARCH??\n")
 		}	
 	});
 }
