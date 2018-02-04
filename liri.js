@@ -120,11 +120,11 @@ function bkstBoys (){
 	});
 }
 function logText (){
-	fs.appendFile("log.txt", "," + userInput, function(err) {
+	fs.appendFile("log.txt", userInput + ",", function(err) {
 		if (err) {
 			return console.log(err);
 		}
-		console.log("Logged search");
+		console.log("Your Search Term has been Logged");
 	});
 }
 
