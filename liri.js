@@ -60,19 +60,29 @@ function twatter(){
 				console.log("____");
 				}
 		}else{
-			console.log("Oops.  Something broke.  Do you have your own Twitter credentials?");
-			console.log("You will need to create your own .env file so you can access your Twitter feed.");
+			console.log("Oops.  Something broke.  Do you have your own Twitter keys?");
+			console.log("You will need to create your own .env file so you can access your Twitter feed.  Error below:");
+			console.log("_______")
+			console.log(error);
+			console.log("");
 			return;
 		}	
 });
 }
 function spotIt (){
 	spotify.search({ type: 'track', query: userInput, limit: 1}, function(err, data) {
+		var songData = data.tracks.items[0];
 		if (err) {
     		return console.log('Error occurred: ' + err);
-		}
- 
-		console.log(data.tracks.items); 
+		}else{
+			console.log("Artist: " + songData.album.artists[0].name); 
+			console.log("");
+			console.log("Song Title: " + )
+			console.log("");
+			console.log("Spotify Link: " + )
+			console.log("");
+			console.log("Album Title: "+ )
+		}	
 	});
 }
 
