@@ -119,7 +119,14 @@ function bkstBoys (){
 		newSpotIt();		
 	});
 }
-
+function logText (){
+	fs.appendFile("log.txt", "," + userInput, function(err) {
+		if (err) {
+			return console.log(err);
+		}
+		console.log("Logged search");
+	});
+}
 
 switch (userCommand){
 	case "my-tweets":
@@ -141,13 +148,5 @@ switch (userCommand){
 	return;
 }
 
-function logText (){
-	fs.appendFile("log.txt", "," + userInput, function(err) {
-		if (err) {
-			return console.log(err);
-		}
-		console.log("Logged search");
-	});
-}
 
 
