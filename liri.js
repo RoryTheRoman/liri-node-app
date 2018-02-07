@@ -15,10 +15,13 @@ var userInput = process.argv[3];
 
 //setting defaults if no movie or song entered:
 if (userCommand === "movie-this" && !userInput){
+	console.log("");
+	console.log("You didn't specify movie!  Watch this:");
 	userInput = "Mr Nobody";
 }
 if (userCommand === "spotify-this-song" && !userInput){
-	userInput = "The Sign";
+	console.log("You didn't specify a song! It's ok. We know you love Ace of Base");
+	userInput = "The Sign Ace of Base";
 }
 //allowing for no command to be entered:
 if (!userCommand || userCommand !== "my-tweets" && userCommand !== "spotify-this-song" && userCommand !== "movie-this" && userCommand !== "do-what-it-says"){
