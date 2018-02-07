@@ -1,3 +1,4 @@
+//Require all of the stuffs:
 require("dotenv").config();
 var fs = require("fs");
 var request = require("request");
@@ -7,26 +8,29 @@ var Spotify = require('node-spotify-api');
 var Twitter = require("twitter");
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
+//defining user inputs:
 var multWords = process.argv;
 var userCommand = process.argv[2];
 var userInput = process.argv[3];
 
-
+//setting defaults if no movie or song entered:
 if (userCommand === "movie-this" && !userInput){
 	userInput = "Mr Nobody";
 }
 if (userCommand === "spotify-this-song" && !userInput){
 	userInput = "The Sign";
 }
+//allowing for no command to be entered:
 if (!userCommand || userCommand !== "my-tweets" && userCommand !== "spotify-this-song" && userCommand !== "movie-this" && userCommand !== "do-what-it-says"){
 	console.log("You got to use one of the right commands, yo.  Check the README.");
 	return;
 }
 
-//create a for loop for user input that is more than one word.  this fixes input at the [2] index, but combines input [4] and above.
+//create a for loop for user input that is more than one word.  userInput is defined at index[3], so this adds input [4] and above.
 for (var i = 4; i < multWords.length; i++) {
 	userInput = userInput + " " + multWords[i];
 }
+//movie-this function:
 function movie (){
 
 	request("http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
@@ -56,6 +60,7 @@ function movie (){
   		}
 	});
 }
+//my-tweets function:
 function twatter(){
 	var params = {screen_name: 'RoryTheRoman79', count: 20};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
@@ -79,6 +84,7 @@ function twatter(){
 		}	
 });
 }
+//spotify-this-song function:
 function spotIt (){
 	spotify.search({ type: 'track', query: userInput, limit: 1}, function(err, data) {
 		var songData = data.tracks.items[0];
@@ -100,6 +106,7 @@ function spotIt (){
 
 	});
 }
+//do-what-it-says function:
 function bkstBoys (){
 	//call up random.txt to get i want it that way displayed
 	fs.readFile("random.txt", "utf8", function(error, data) {
@@ -132,15 +139,18 @@ function bkstBoys (){
 		newSpotIt();		
 	});
 }
+//function to log text to the log.txt file:
 function logText (){
 	fs.appendFile("log.txt", userInput + ",", function(err) {
 		if (err) {
 			return console.log(err);
 		}
 		console.log("****Your Search Term has been Logged****");
+		console.log("BIG BROTHER IS WATCHING");
+		console.log("");
 	});
 }
-
+//calling all the functions based on the userCommand entered, using switch/case:
 switch (userCommand){
 	case "my-tweets":
 	twatter();
@@ -161,5 +171,5 @@ switch (userCommand){
 	return;
 }
 
-
+//the end.
 
