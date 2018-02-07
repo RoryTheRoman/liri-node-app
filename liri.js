@@ -9,7 +9,19 @@ var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 var multWords = process.argv;
 var userCommand = process.argv[2];
-var userInput = process.argv[3]; 
+var userInput = process.argv[3];
+
+
+if (userCommand === "movie-this" && !userInput){
+	userInput = "Mr Nobody";
+}
+if (userCommand === "spotify-this-song" && !userInput){
+	userInput = "The Sign";
+}
+if (!userCommand || userCommand !== "my-tweets" && userCommand !== "spotify-this-song" && userCommand !== "movie-this" && userCommand !== "do-what-it-says"){
+	console.log("You got to use one of the right commands, yo.  Check the README.");
+	return;
+}
 
 //create a for loop for user input that is more than one word.  this fixes input at the [2] index, but combines input [4] and above.
 for (var i = 4; i < multWords.length; i++) {
@@ -85,6 +97,7 @@ function spotIt (){
 			console.log("NEW SEARCH??")
 			console.log("");			
 		}	
+
 	});
 }
 function bkstBoys (){
