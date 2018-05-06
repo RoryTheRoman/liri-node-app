@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/RoryTheRoman/liri-node-app#readme",
   "dependencies": {
-    "dotenv": "^5.0.0",
+    "dotenv": "^5.0.1",
+    "hoek": "^5.0.3",
     "node-spotify-api": "^1.0.7",
-    "request": "^2.83.0",
+    "npm": "^6.0.0",
+    "request": "^2.85.0",
     "twitter": "^1.7.1"
   }
 }
